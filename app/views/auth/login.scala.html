@@ -1,0 +1,19 @@
+@(user: Form[UserLoginData], maybeErrorMessage: Option[String])(implicit request: RequestHeader, messages: Messages)
+
+@import helper._
+
+@main("Login") {
+
+  @form(routes.AuthController.doLogin()) {
+		@inputText(user("email"))
+		@inputText(user("password"))
+
+		<div class="buttons">
+			<input type="submit" value="Login"/>
+		</div>
+	  @maybeErrorMessage.map {errorMessage =>
+		  <span class="label bg--error">@errorMessage</span>
+	  }
+	}
+
+}
