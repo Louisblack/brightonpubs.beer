@@ -56,7 +56,7 @@ class PubRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit
   def listPubs(): Future[Seq[PubWithLocation]] = {
     db.run {
       val query = for {
-        (pub, location) <- pubs join locations on (_.id === _.pubId)
+        (pub, location) <- pubs join locations on (_.id === _.pubId) sortBy(_._1.name.asc)
       } yield {
         (pub, location)
       }

@@ -7,6 +7,10 @@ case class PubWithLocationAndVisit(pubWithLocation: PubWithLocation, visit: Opti
     pubWithLocation.pub.name
   }
 
+  def id: Long = {
+    pubWithLocation.pub.id
+  }
+
 }
 
 object PubWithLocationAndVisit {

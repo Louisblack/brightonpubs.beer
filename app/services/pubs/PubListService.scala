@@ -7,14 +7,14 @@ import play.api.libs.json.Json
 
 import scala.concurrent.{ExecutionContext, Future}
 
-case class Pub(name: String, visited: Boolean)
+case class Pub(id: Long, name: String, visited: Boolean)
 
 object Pub {
 
   implicit val writes = Json.writes[Pub]
 
   def apply(pubWithLocation: PubWithLocation): Pub = {
-    Pub(pubWithLocation.pub.name, false)
+    Pub(pubWithLocation.pub.id, pubWithLocation.pub.name, false)
   }
 
   def apply(pubWithLocationAndVisit: PubWithLocationAndVisit): Pub = {
@@ -22,7 +22,7 @@ object Pub {
       case None => false
       case Some(_) => true
     }
-    Pub(pubWithLocationAndVisit.name, visited)
+    Pub(pubWithLocationAndVisit.id, pubWithLocationAndVisit.name, visited)
   }
 }
 
