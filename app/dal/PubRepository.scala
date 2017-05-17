@@ -70,7 +70,7 @@ class PubRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit
 
   private def pubsWithLocationsQuery(userId: Long) = {
     val query = for {
-      ((pub, location), visit) <- pubs join locations on (_.id === _.pubId) joinLeft userVisits(userId) on (_._1.id === _.pubId)
+      ((pub, location), visit) <- pubs join locations on (_.id === _.pubId) joinLeft userVisits(userId) on (_._1.id === _.pubId) sortBy(_._1._1.name.asc)
     } yield {
       ((pub, location), visit)
     }
