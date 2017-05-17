@@ -11,23 +11,35 @@ class PubListComponent extends React.Component {
     }
 
     render = () => {
+
         return <ul>
             {this.state.pubs.map(pub => {
-                return <li>
+                let button = !pub.visited ? <button onClick={e => this.visitPub(pub.id)}>Been!</button> : ""
+                return <li key={pub.id}>
                     {pub.name} - {pub.visited ? "Visited" : "Not Visited"}
+                    {button}
                 </li>
             })}
         </ul>;
     };
 
+    visitPub = (id) => {
+        axios.post(`/pubs/visit/${id}`)
+            .then(this.refreshPubs);
+    };
+
     componentDidMount = () => {
+        this.refreshPubs();
+    };
+
+    refreshPubs = () => {
         axios.get('/pubs').then(response => {
             const json = response.data;
             this.setState({
                 pubs: json
             }, () => console.log(this.state));
-        })
-    };
+        });
+    }
 }
 
 export default PubListComponent;
