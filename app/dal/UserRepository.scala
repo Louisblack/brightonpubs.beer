@@ -1,7 +1,7 @@
 package dal
 
 import com.google.inject.Inject
-import models.{User, Visit}
+import models.User
 import play.api.db.slick.DatabaseConfigProvider
 import slick.driver.JdbcProfile
 
@@ -16,7 +16,9 @@ class UserRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implici
 
   private class Users(tag: Tag) extends Table[User](tag, "users") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+
     def email = column[String]("email")
+
     def password = column[String]("password")
 
     def * = (id, email, password) <> ((User.apply _).tupled, User.unapply)
@@ -32,10 +34,10 @@ class UserRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implici
     users.filter(_.email === email)
   }
 
-  def create(email: String, password: String) : Future[User] = db.run {
-      (users returning users.map(_.id)
-        into ((user,id) => user.copy(id = id))
-        ) += User(0, email, password)
+  def create(email: String, password: String): Future[User] = db.run {
+    (users returning users.map(_.id)
+      into ((user, id) => user.copy(id = id))
+      ) += User(0, email, password)
   }
 
 }

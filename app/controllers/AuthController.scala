@@ -2,8 +2,7 @@ package controllers
 
 import com.google.inject.{Inject, Singleton}
 import play.api.data.Form
-import play.api.data.Forms.mapping
-import play.api.data.Forms._
+import play.api.data.Forms.{mapping, _}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, Controller}
 import services.auth.AuthService

@@ -9,8 +9,8 @@ import play.api.mvc.Cookie
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class SignUpService @Inject() (userRepository: UserRepository,
-                               cookieCreator: CookieCreator)(implicit ec: ExecutionContext) {
+class SignUpService @Inject()(userRepository: UserRepository,
+                              cookieCreator: CookieCreator)(implicit ec: ExecutionContext) {
 
   def signUp(email: String, password: String): Future[Either[String, Cookie]] = {
 
@@ -29,7 +29,7 @@ class SignUpService @Inject() (userRepository: UserRepository,
     }
   }
 
-  private def createUserAndGenerateCookie(email: String, password:String): Future[Either[String, Cookie]] = {
+  private def createUserAndGenerateCookie(email: String, password: String): Future[Either[String, Cookie]] = {
     for {
       user <- createUser(email, password)
     } yield {

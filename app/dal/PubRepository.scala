@@ -8,8 +8,7 @@ import slick.driver.JdbcProfile
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class PubRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
-
+class PubRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
 
 
   private val dbConfig = dbConfigProvider.get[JdbcProfile]
@@ -19,14 +18,19 @@ class PubRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(implici
 
   private class Visits(tag: Tag) extends Table[Visit](tag, "visits") {
     def pubId = column[Long]("pub_id")
+
     def userId = column[Long]("user_id")
+
     def * = (pubId, userId) <> ((Visit.apply _).tupled, Visit.unapply)
   }
 
   private class Locations(tag: Tag) extends Table[Location](tag, "locations") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+
     def pubId = column[Long]("pub_id")
+
     def lat = column[Double]("lat")
+
     def lng = column[Double]("lng")
 
     def * = (id, pubId, lat, lng) <> ((Location.apply _).tupled, Location.unapply)
@@ -34,7 +38,9 @@ class PubRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(implici
 
   private class Pubs(tag: Tag) extends Table[Pub](tag, "pubs") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+
     def name = column[String]("name")
+
     def * = (id, name) <> ((Pub.apply _).tupled, Pub.unapply)
   }
 

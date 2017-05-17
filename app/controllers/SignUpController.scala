@@ -42,7 +42,7 @@ class SignUpController @Inject()(val signUpService: SignUpService,
     Ok(views.html.auth.signup(userSignUpForm, None))
   }
 
-  def doSignUp = Action.async(parse.anyContent) {implicit request =>
+  def doSignUp = Action.async(parse.anyContent) { implicit request =>
     userSignUpForm.bindFromRequest.fold(
       _ => Future.successful(Ok(views.html.auth.signup(userSignUpForm, Some("Sign up Failed")))),
       signUpData => {
