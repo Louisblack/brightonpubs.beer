@@ -16,7 +16,7 @@ import scala.concurrent.duration.Duration
 @Singleton
 class CookieCreator @Inject()(cacheApi: CacheApi)(ec: ExecutionContext) {
 
-  def createCookie(user: User) : Cookie = {
+  def createCookie(user: User): Cookie = {
     val randomPart = UUID.randomUUID.toString.toUpperCase
     val userPart = user.id.toString.toUpperCase
     val key = s"$randomPart|$userPart"

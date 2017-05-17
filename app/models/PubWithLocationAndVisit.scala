@@ -1,6 +1,5 @@
 package models
 
-import play.api.libs.json
 import play.api.libs.json.Json
 
 case class PubWithLocationAndVisit(pubWithLocation: PubWithLocation, visit: Option[Visit]) {
@@ -13,7 +12,7 @@ case class PubWithLocationAndVisit(pubWithLocation: PubWithLocation, visit: Opti
 object PubWithLocationAndVisit {
   implicit val writes = Json.writes[PubWithLocationAndVisit]
 
-  def apply(t: ((Pub, Location), Option[Visit])) : PubWithLocationAndVisit = {
+  def apply(t: ((Pub, Location), Option[Visit])): PubWithLocationAndVisit = {
     PubWithLocationAndVisit(PubWithLocation(t._1._1, t._1._2), t._2)
   }
 }

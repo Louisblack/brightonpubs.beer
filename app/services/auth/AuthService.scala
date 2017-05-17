@@ -1,19 +1,13 @@
 package services.auth
 
-import java.security.MessageDigest
-import java.util.UUID
-import java.util.concurrent.TimeUnit
-
 import com.google.inject.{Inject, Singleton}
 import dal.UserRepository
 import models.User
-import org.apache.commons.codec.binary.Base64
 import org.mindrot.jbcrypt.BCrypt
 import play.api.cache.CacheApi
 import play.api.mvc.{Cookie, RequestHeader}
 
 import scala.concurrent.{ExecutionContext, Future}
-import scala.concurrent.duration.Duration
 
 @Singleton
 class AuthService @Inject()(userRepository: UserRepository,
@@ -32,7 +26,7 @@ class AuthService @Inject()(userRepository: UserRepository,
     }
   }
 
-  private def checkUser(userCode: String, password: String) : Future[Option[User]] = {
+  private def checkUser(userCode: String, password: String): Future[Option[User]] = {
     for {
       maybeUser <- userRepository.getUserByEmail(userCode)
     } yield {

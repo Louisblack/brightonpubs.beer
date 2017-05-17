@@ -4,11 +4,10 @@ import com.google.inject.Inject
 import dal.PubRepository
 import play.api.libs.json.Json
 import play.api.mvc._
+import services.auth.{MaybeUserAuthAction, UserAuthAction}
 import services.pubs.PubListService
-import services.auth.{MaybeUserAuthAction, MaybeUserAuthRequest, UserAuthAction}
 
 import scala.concurrent.ExecutionContext
-
 
 
 class PubsController @Inject()(pubRepository: PubRepository,

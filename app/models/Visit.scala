@@ -7,6 +7,6 @@ import play.api.libs.json.Json
   */
 case class Visit(pubId: Long, userId: Long)
 
-object Visit{
+object Visit {
   implicit val writes = Json.writes[Visit]
 }

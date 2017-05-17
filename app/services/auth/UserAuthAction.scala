@@ -10,7 +10,7 @@ case class UserAuthRequest[A](user: User, request: Request[A])
   extends WrappedRequest[A](request)
 
 @Singleton
-class UserAuthAction @Inject() (authService: AuthService) extends ActionBuilder[UserAuthRequest] {
+class UserAuthAction @Inject()(authService: AuthService) extends ActionBuilder[UserAuthRequest] {
 
   override def invokeBlock[A](request: Request[A],
                               block: (UserAuthRequest[A]) =>
@@ -27,7 +27,7 @@ case class MaybeUserAuthRequest[A](user: Option[User], request: Request[A])
   extends WrappedRequest[A](request)
 
 @Singleton
-class MaybeUserAuthAction @Inject() (authService: AuthService) extends ActionBuilder[MaybeUserAuthRequest] {
+class MaybeUserAuthAction @Inject()(authService: AuthService) extends ActionBuilder[MaybeUserAuthRequest] {
 
   override def invokeBlock[A](request: Request[A],
                               block: (MaybeUserAuthRequest[A]) =>
