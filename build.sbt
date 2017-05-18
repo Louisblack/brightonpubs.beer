@@ -21,6 +21,8 @@ enablePlugins(SbtWeb)
 
 enablePlugins(SbtJsEngine)
 
+updateOptions := updateOptions.value.withCachedResolution(true)
+
 import com.typesafe.sbt.jse.JsEngineImport.JsEngineKeys._
 import com.typesafe.sbt.jse.SbtJsTask._
 import com.typesafe.sbt.jse.SbtJsEngine.autoImport.JsEngineKeys._
