@@ -1,0 +1,1 @@
+web: target/universal/stage/bin/brighton-pubs-app -Dhttp.port=${PORT} -Dplay.crypto.secret=${SECRET}
