@@ -1,31 +1,24 @@
 import React from 'react';
 import axios from 'axios';
 
+import PubListItemComponent from './pub-list-item-component.jsx';
+
 class PubListComponent extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            pubs: []
+            pubs: [],
+            loggedIn: false
         };
     }
 
     render = () => {
-
         return <ul>
             {this.state.pubs.map(pub => {
-                let button = !pub.visited ? <button onClick={e => this.visitPub(pub.id)}>Been!</button> : ""
-                return <li key={pub.id}>
-                    {pub.name} - {pub.visited ? "Visited" : "Not Visited"}
-                    {button}
-                </li>
+                return <PubListItemComponent pub={pub} loggedIn={this.state.loggedIn} refresh={this.refreshPubs} />
             })}
         </ul>;
-    };
-
-    visitPub = (id) => {
-        axios.post(`/pubs/visit/${id}`)
-            .then(this.refreshPubs);
     };
 
     componentDidMount = () => {
@@ -36,7 +29,9 @@ class PubListComponent extends React.Component {
         axios.get('/pubs').then(response => {
             const json = response.data;
             this.setState({
-                pubs: json
+                pubs: json.pubs,
+                loggedIn: !!json.maybeEmail
+
             }, () => console.log(this.state));
         });
     }
