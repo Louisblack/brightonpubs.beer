@@ -15,3 +15,33 @@ libraryDependencies += specs2 % Test
 libraryDependencies += filters
 libraryDependencies += ws
 libraryDependencies += cache
+
+enablePlugins(SbtWeb)
+
+enablePlugins(SbtJsEngine)
+
+import com.typesafe.sbt.jse.JsEngineImport.JsEngineKeys._
+import com.typesafe.sbt.jse.SbtJsTask._
+import com.typesafe.sbt.jse.SbtJsEngine.autoImport.JsEngineKeys._
+import scala.concurrent.duration._
+
+lazy val install = taskKey[Unit]("npm")
+
+install := {
+  ( npmNodeModules in Assets ).value
+  val modules =  (baseDirectory.value / "node_modules").getAbsolutePath
+  executeJs(state.value,
+    engineType.value,
+    None,
+    Seq(modules),
+    baseDirectory.value / "node_modules/webpack/bin/webpack.js",
+    Seq(),
+    30.seconds)
+  ()
+}
+
+(packageBin in Assets) <<= (packageBin in Assets) dependsOn install
+
+
+
+
