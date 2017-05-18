@@ -9,6 +9,7 @@ scalaVersion := "2.11.8"
 libraryDependencies += "com.typesafe.play" %% "play-slick" % "2.0.2"
 libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "2.0.2"
 libraryDependencies += "com.h2database" % "h2" % "1.4.192"
+libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1201-jdbc41"
 libraryDependencies += "de.svenkubiak" % "jBCrypt" % "0.4.1"
 
 libraryDependencies += specs2 % Test
@@ -42,6 +43,11 @@ install := {
 
 (packageBin in Assets) <<= (packageBin in Assets) dependsOn install
 
+herokuProcessTypes in Compile := Map(
+  "web" -> "target/universal/stage/bin/brighton-pubs-app -Dhttp.port=$PORT -Dconfig.resource=${CONF} -Dplay.crypto.secret=${SECRET}"
+)
 
-
-
+herokuAppName in Compile := Map(
+  "staging"  -> "brightonpubs-staging",
+  "prod"     -> "brightonpubs-prod"
+).getOrElse(sys.props("appEnv"), "brightonpubs-dev")
