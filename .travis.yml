@@ -6,8 +6,6 @@ scala:
 
 jobs:
   include:
-    - stage: unit tests
-      script: sbt test
     - stage: deploy to staging
       script: skip
       deploy: &heroku
