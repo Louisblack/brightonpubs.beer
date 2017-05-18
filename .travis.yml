@@ -22,4 +22,4 @@ jobs:
         provider: heroku
         app: brightonpubs-staging
         api_key: $HEROKU_AUTH_TOKEN
-        on: deploy
+        on: master
