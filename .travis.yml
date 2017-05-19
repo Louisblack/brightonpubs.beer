@@ -16,7 +16,7 @@ before_cache:
 
 install:
   # JavaScript test and build requirements
-  - sudo curl -sL https://deb.nodesource.com/setup_7.x | bash -
+  - sudo curl -sL https://deb.nodesource.com/setup_7.x | sudo bash -
   - sudo apt-get -y -qq update
   - sudo apt-get -y install nodejs
 
