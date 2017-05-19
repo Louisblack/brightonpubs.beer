@@ -28,3 +28,4 @@ deploy:
   script: node -v && sbt -DappEnv=staging stage deployHeroku
   skip_cleanup: true
   on: master
+
