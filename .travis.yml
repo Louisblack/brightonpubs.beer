@@ -17,3 +17,5 @@ before_cache:
 deploy:
   provider: script
   script: sbt stage deployHeroku
+  skip_cleanup: true
+  on: deployheroku
