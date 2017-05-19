@@ -20,10 +20,9 @@ before_cache:
 before_deploy:
   # JavaScript test and build requirements
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
-  - npm install
 
 deploy:
   provider: script
-  script: node -v && sbt stage deployHeroku
+  script: node -v && sbt -DappEnv=staging stage deployHeroku
   skip_cleanup: true
   on: deployheroku
