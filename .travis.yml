@@ -1,8 +1,11 @@
 language: scala
 jdk: oraclejdk8
-sudo: false
+sudo: required
 scala:
   - 2.11.8
+
+env:
+  - TRAVIS_NODE_VERSION="6"
 
 cache:
   directories:
@@ -14,10 +17,15 @@ before_cache:
   - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
   - find $HOME/.sbt        -name "*.lock"               -print -delete
 
+before_deploy:
+  # JavaScript test and build requirements
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - npm install
+  - npm run webpack
+
 deploy:
-  provider: heroku
-  api_key: $HEROKU_AUTH_TOKEN
+  provider: script
+  script: node -v && sbt -DappEnv=staging stage deployHeroku
   skip_cleanup: true
-  app:
-      master: brightonpubs-staging
-      production: brightonpubs-prod
+  on: master
+
