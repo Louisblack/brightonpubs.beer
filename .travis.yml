@@ -15,5 +15,9 @@ before_cache:
   - find $HOME/.sbt        -name "*.lock"               -print -delete
 
 deploy:
-  provider: script
-  script: sbt stage deployHeroku
+  provider: heroku
+  api_key: $HEROKU_AUTH_TOKEN
+  skip_cleanup: true
+  app:
+      master: brightonpubs-staging
+      production: brightonpubs-prod
