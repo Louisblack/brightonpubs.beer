@@ -4,6 +4,9 @@ sudo: required
 scala:
   - 2.11.8
 
+env:
+  - TRAVIS_NODE_VERSION="6"
+
 cache:
   directories:
     - $HOME/.ivy2/cache
@@ -16,9 +19,8 @@ before_cache:
 
 before_deploy:
   # JavaScript test and build requirements
-  - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-  - sudo apt-get -y -qq update
-  - sudo apt-get -y install nodejs
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - npm install
 
 deploy:
   provider: script
