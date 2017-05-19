@@ -14,6 +14,12 @@ before_cache:
   - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
   - find $HOME/.sbt        -name "*.lock"               -print -delete
 
+install:
+  # JavaScript test and build requirements
+  - sudo add-apt-repository -y ppa:chris-lea/node.js
+  - sudo apt-get -y -qq update
+  - sudo apt-get -y install nodejs
+
 deploy:
   provider: script
   script: node -v && sbt stage deployHeroku
