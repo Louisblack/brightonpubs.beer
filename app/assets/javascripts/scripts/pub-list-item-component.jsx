@@ -4,23 +4,27 @@ import axios from 'axios';
 class PubListItemComponent extends React.Component {
 
     render = () => {
-        let button = this.props.loggedIn && !this.props.pub.visited ?
-            <button onClick={e => this.visitPub(this.props.pub.id)}>Been!</button> : "";
-        return <li key={this.props.pub.id}>
-            <h2>{this.props.pub.name}</h2>
-            {this.status()}
-            {button}
+        return <li key={this.props.pub.id} className="pub-list__item">
+            <div>
+                {this.status()}
+                <h3>{this.props.pub.name}</h3>
+            </div>
+
         </li>;
     };
 
     visitPub = (id) => {
-        axios.post(`/pubs/visit/${id}`)
-            .then(this.props.refresh);
+        if (!this.props.pub.visited) {
+            axios.post(`/pubs/visit/${id}`)
+                .then(this.props.refresh);
+        }
     };
 
     status = () => {
         if (this.props.loggedIn) {
-            return this.props.pub.visited ? "Visited" : "Not Visited";
+            let className = "pub-list__item__status--" + (this.props.pub.visited ? "visited" : "not-visited");
+            return <div className={className + " glyphicon glyphicon-ok-circle pub-list__item__status"}
+                        onClick={e => this.visitPub(this.props.pub.id)}></div>
         }
 
     }
