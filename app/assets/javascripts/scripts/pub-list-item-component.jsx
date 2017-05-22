@@ -4,7 +4,7 @@ import axios from 'axios';
 class PubListItemComponent extends React.Component {
 
     render = () => {
-        return <li key={this.props.pub.id} className="pub-list__item">
+        return <li key={this.props.pub.id} className="pub-list__list__item">
             <div>
                 {this.status()}
                 <h3>{this.props.pub.name}</h3>
@@ -22,8 +22,8 @@ class PubListItemComponent extends React.Component {
 
     status = () => {
         if (this.props.loggedIn) {
-            let className = "pub-list__item__status--" + (this.props.pub.visited ? "visited" : "not-visited");
-            return <div className={className + " glyphicon glyphicon-ok-circle pub-list__item__status"}
+            let className = "pub-list__list__item__status--" + (this.props.pub.visited ? "visited" : "not-visited");
+            return <div className={className + " glyphicon glyphicon-ok-circle pub-list__list__item__status"}
                         onClick={e => this.visitPub(this.props.pub.id)}></div>
         }
 

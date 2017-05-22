@@ -4,17 +4,17 @@
 
 @main("Sign up") {
 
-    @form(routes.SignUpController.doSignUp()) {
-        @inputText(user("email"))
-        @inputPassword(user("password"))
-        @inputPassword(user("passwordAgain"))
-
-        <div class="buttons">
-            <input type="submit" value="Sign up"/>
-        </div>
-        @maybeErrorMessage.map { errorMessage =>
-            <span class="label bg--error">@errorMessage</span>
-        }
-    }
+    <div class="wrapper">
+        <form class="form-signin auth-form" action="/signup" method="POST">
+            <h2 class="form-signin-heading">Please sign up</h2>
+            <input type="text" class="form-control" name="email" placeholder="Email Address" required="" autofocus="" />
+            <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
+            <input type="password" class="form-control" name="passwordAgain" placeholder="Password again" required=""/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+            @maybeErrorMessage.map { errorMessage =>
+                <span class="auth-error text-danger">@errorMessage</span>
+            }
+        </form>
+    </div>
 
 }
