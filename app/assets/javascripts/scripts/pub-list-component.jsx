@@ -16,7 +16,7 @@ class PubListComponent extends React.Component {
     render = () => {
         return <div>
             {this.message()}
-            <ul>
+            <ul className="list-unstyled pub-list">
                 {this.state.pubs.map(pub => {
                     return <PubListItemComponent pub={pub} loggedIn={this.state.loggedIn} refresh={this.refreshPubs} />
                 })}
