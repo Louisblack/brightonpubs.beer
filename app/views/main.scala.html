@@ -1,15 +1,19 @@
 @(title: String)(content: Html)
-
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>@title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")"/>
         <link rel="stylesheet" href="@routes.Assets.versioned("compiled/styles.css")"/>
-
     </head>
     <body>
+        <div class="headline">
+            <img src="@routes.Assets.versioned("images/headline.png")"
+                 class="img-responsive headline__image"
+                 alt="Responsive image">
+            <h1 class="headline__text">PUBS</h1>
+        </div>
         @content
         <script src="@routes.Assets.versioned("compiled/bundle.js")"></script>
     </body>

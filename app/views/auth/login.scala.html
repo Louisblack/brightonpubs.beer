@@ -6,7 +6,7 @@
 
     @form(routes.AuthController.doLogin()) {
         @inputText(user("email"))
-        @inputText(user("password"))
+        @inputPassword(user("password"))
 
         <div class="buttons">
             <input type="submit" value="Login"/>
