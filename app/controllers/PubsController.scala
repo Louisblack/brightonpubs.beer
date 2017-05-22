@@ -6,14 +6,14 @@ import models.User
 import play.api.libs.json.Json
 import play.api.mvc._
 import services.auth.{MaybeUserAuthAction, UserAuthAction}
-import services.pubs.{Pub, PubListService}
+import services.pubs.{Pub, PubListService, PubStats}
 
 import scala.concurrent.ExecutionContext
 
-case class PubsAndMaybeEmail(pubs: Seq[Pub], maybeEmail: Option[String])
+case class PubsStatsAndMaybeEmail(pubs: Seq[Pub], pubStats: PubStats, maybeEmail: Option[String])
 
-object PubsAndMaybeEmail {
-  implicit val writes = Json.writes[PubsAndMaybeEmail]
+object PubsStatsAndMaybeEmail {
+  implicit val writes = Json.writes[PubsStatsAndMaybeEmail]
 }
 
 class PubsController @Inject()(pubRepository: PubRepository,
@@ -25,7 +25,7 @@ class PubsController @Inject()(pubRepository: PubRepository,
     for {
       pubs <- pubListService.listPubs(maybeUserAuthRequest.user)
     } yield {
-      Ok(Json.toJson(PubsAndMaybeEmail(pubs, maybeUserAuthRequest.user.map(_.email))))
+      Ok(Json.toJson(PubsStatsAndMaybeEmail(pubs, PubStats(pubs), maybeUserAuthRequest.user.map(_.email))))
     }
   }
 
