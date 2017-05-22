@@ -1,10 +1,12 @@
 .pub-list {
-    max-width: 90%;
-    margin-left: auto;
+}
+
+.pub-list__list {
+    margin-top: auto;
     margin-right: auto;
 }
 
-.pub-list__item {
+.pub-list__list__item {
     border: 1px #bbbbbb solid;
     border-radius: 1em;
     margin-top: 1em;
@@ -13,21 +15,21 @@
     min-height: 4em;
 }
 
-.pub-list__item h3 {
+.pub-list__list__item h3 {
     margin-top: 0px;
     float: left;
 }
 
-.pub-list__item__status {
+.pub-list__list__item__status {
     margin-right: 1em;
     float: left;
     font-size: 1.5em;
 }
 
-.pub-list__item__status--visited {
+.pub-list__list__item__status--visited {
     color: green;
 }
 
-.pub-list__item__status--not-visited {
+.pub-list__list__item__status--not-visited {
     color: black;
 }

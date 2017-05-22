@@ -32,7 +32,7 @@ class AuthController @Inject()(val authService: AuthService,
 
   def doLogin = Action.async(parse.anyContent) { implicit request =>
     userDataForm.bindFromRequest.fold(
-      formWithErrors => Future.successful(Ok(views.html.auth.login(userDataForm, Some("Login Failed")))),
+      formWithErrors => Future.successful(Ok(views.html.auth.login(userDataForm, Some("Oops, that doesn't look right.")))),
       userData => {
         for {
           maybeCookie <- authService.login(userData.email, userData.password)
@@ -41,7 +41,7 @@ class AuthController @Inject()(val authService: AuthService,
             case Some(cookie) =>
               Redirect("/").withCookies(cookie)
             case None =>
-              Ok(views.html.auth.login(userDataForm, Some("Login Failed")))
+              Ok(views.html.auth.login(userDataForm, Some("Oops, email or password were incorrect.")))
           }
         }
       }

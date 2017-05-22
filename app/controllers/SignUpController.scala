@@ -44,7 +44,7 @@ class SignUpController @Inject()(val signUpService: SignUpService,
 
   def doSignUp = Action.async(parse.anyContent) { implicit request =>
     userSignUpForm.bindFromRequest.fold(
-      _ => Future.successful(Ok(views.html.auth.signup(userSignUpForm, Some("Sign up Failed")))),
+      _ => Future.successful(Ok(views.html.auth.signup(userSignUpForm, Some("Oops, something wasn't quite right.")))),
       signUpData => {
         for {
           maybeCookie <- signUpService.signUp(signUpData.email, signUpData.password)
