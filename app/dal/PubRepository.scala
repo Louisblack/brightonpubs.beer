@@ -88,7 +88,21 @@ class PubRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit
     }
   }
 
+  def unVisit(pubId: Long, userId: Long): Future[Int] = {
+    for  {
+      rows <- db.run(visitDelete(pubId, userId))
+    } yield {
+      rows
+    }
+
+  }
+
   private def visitInsert(pubId: Long, userId: Long) = {
     visits += Visit(pubId, userId)
+  }
+
+  private def visitDelete(pubId: Long, userId: Long) = {
+    val q = visits.filter(visit => visit.pubId === pubId && visit.userId === userId)
+    q.delete
   }
 }

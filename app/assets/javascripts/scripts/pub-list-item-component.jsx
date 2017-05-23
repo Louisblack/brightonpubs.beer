@@ -17,6 +17,9 @@ class PubListItemComponent extends React.Component {
         if (!this.props.pub.visited) {
             axios.post(`/pubs/visit/${id}`)
                 .then(this.props.refresh);
+        } else {
+            axios.post(`/pubs/unvisit/${id}`)
+                .then(this.props.refresh);
         }
     };
 
