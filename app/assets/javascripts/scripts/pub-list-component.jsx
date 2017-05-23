@@ -26,15 +26,33 @@ class PubListComponent extends React.Component {
 
     message = () => {
         if (this.state.loggedIn) {
-            return <p>
+            return this.getStats()
+        } else {
+            return this.loginMessage()
+        }
+    };
+
+    loginMessage = () => {
+        return <p>
+            <a href="/login" className="reet-big-text">Log in</a> or <a href="signup" className="reet-big-text">sign
+            up</a> to track the pubs you've visited.
+        </p>;
+    };
+
+    getStats = () => {
+        return <div>
+            <p>
                 You've visited <span className="reet-big-text">{this.state.pubStats.visited}</span>
                 <span> of </span><span className="reet-big-text">{this.state.pubStats.total}</span> pubs in Brighton.
                 That's <span className="reet-big-text">{this.state.pubStats.percentage}%!</span>
             </p>
-        } else {
-            return <p>
-                <a href="/login" className="reet-big-text">Log in</a> or <a href="signup" className="reet-big-text">sign up</a> to track the pubs you've visited.
-            </p>
+            {this.getInstructions()}
+        </div>;
+    };
+
+    getInstructions = () => {
+        if (this.state.pubStats.visited === 0) {
+            return <p>Hit the black tick next to the pubs you visited.</p>
         }
     };
 
