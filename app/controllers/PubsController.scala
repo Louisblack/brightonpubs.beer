@@ -36,4 +36,12 @@ class PubsController @Inject()(pubRepository: PubRepository,
       Ok(Json.toJson(visit))
     }
   }
+
+  def unVisit(pubId: Long) = userAuthAction.async { userAuthRequest =>
+    for {
+      _ <- pubRepository.unVisit(pubId, userAuthRequest.user.id)
+    } yield {
+      Ok("Done")
+    }
+  }
 }
