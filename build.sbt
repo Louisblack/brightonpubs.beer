@@ -50,6 +50,7 @@ herokuProcessTypes in Compile := Map(
 )
 
 herokuAppName in Compile := Map(
+  "dev"      -> "brightonpubs-dev",
   "staging"  -> "brightonpubs-staging",
   "prod"     -> "brightonpubs-prod"
 ).getOrElse(sys.props("appEnv"), "brightonpubs-dev")
