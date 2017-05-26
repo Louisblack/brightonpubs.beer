@@ -10,18 +10,18 @@ I'd build a website where people can do just that.
 This repo is the code for that website.  
 
 
-###Missing Pubs
+### Missing Pubs
 * Islingword
 * Village
 * Fiveways
 * Richmond
 * Brighton Bierhaus
 
-###Pubs that have closed
+### Pubs that have closed
 * Horse and Groom
 * Foundry
 
-###To do
+### To do
 * Keep me logged in
 * Login with OAuth
 * Report a missing pub
