@@ -3,7 +3,7 @@ package functional
 import org.scalatestplus.play.{OneBrowserPerTest, OneServerPerTest, PlaySpec, _}
 import play.api.test.Helpers.{GET => GET_REQUEST}
 
-class LoginSpec extends PlaySpec with OneServerPerTest with OneBrowserPerTest with HtmlUnitFactory {
+class LoginSpec extends PlaySpec with OneServerPerTest with OneBrowserPerTest with ChromeFactory {
 
   "Login page" must {
     "should allow login for correct credentials" in {
