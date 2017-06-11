@@ -27,6 +27,12 @@ html body {
     text-align: center;
 }
 
+@media (max-width: 600px) {
+    .headline .headline__text {
+        font-size: 5em;
+    }
+}
+
 .reet-big-text {
     font-size: 2em;
 }
