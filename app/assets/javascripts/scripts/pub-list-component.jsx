@@ -33,10 +33,21 @@ class PubListComponent extends React.Component {
     };
 
     loginMessage = () => {
-        return <p>
-            <a href="/login" className="reet-big-text">Log in</a> or <a href="signup" className="reet-big-text">sign
-            up</a> to track the pubs you've visited.
-        </p>;
+        return <div>
+            <h3>Brighton has hundreds of great pubs</h3>
+            <p>
+                This site gives you the a way to find undiscovered gems that they'd never usually find.
+            </p>
+            <p>
+                <a href="/login" className="reet-big-text"> Log in</a> or <a href="signup" className="reet-big-text">sign
+                up</a> to start tracking the pubs you've visited and find out which ones you haven't.
+            </p>
+            <p>
+                Over time we'll add features to make discovering new pubs even easier. If you have any suggestions
+                for new features or want to let us know about a new pub or one that is no longer open then contact
+                us over on Twitter - <a href="https://twitter.com/louisblack">@louisblack</a>.
+            </p>
+        </div>;
     };
 
     getStats = () => {
