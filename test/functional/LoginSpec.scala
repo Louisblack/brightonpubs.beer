@@ -1,20 +1,12 @@
 package functional
 
-import org.scalatestplus.play.{OneBrowserPerTest, OneServerPerTest, PlaySpec}
-
-/**
-  * Created by louis on 11/06/2017.
-  */
-class LoginSpec {
-
-}
-import org.scalatestplus.play._
+import org.scalatestplus.play.{OneBrowserPerTest, OneServerPerTest, PlaySpec, _}
 import play.api.test.Helpers.{GET => GET_REQUEST}
 
-class ExampleSpec extends PlaySpec with OneServerPerTest with OneBrowserPerTest with ChromeFactory {
+class LoginSpec extends PlaySpec with OneServerPerTest with OneBrowserPerTest with HtmlUnitFactory {
 
   "Login page" must {
-    "should allow login" in {
+    "should allow login for correct credentials" in {
       go to (s"http://localhost:$port/login")
       pageTitle mustBe "Login"
       click on find(name("email")).value
