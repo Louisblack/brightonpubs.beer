@@ -36,7 +36,7 @@ class PubListComponent extends React.Component {
         return <div>
             <h3>Brighton has hundreds of great pubs</h3>
             <p>
-                This site gives you the a way to find undiscovered gems that they'd never usually find.
+                This site gives you the a way to find undiscovered gems that you'd never usually find.
             </p>
             <p>
                 <a href="/login" className="reet-big-text"> Log in</a> or <a href="signup" className="reet-big-text">sign
