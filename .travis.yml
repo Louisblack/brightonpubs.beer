@@ -5,6 +5,9 @@ sudo: required
 scala:
   - 2.11.8
 
+addons:
+  chrome: stable
+
 env:
   - TRAVIS_NODE_VERSION="6"
 
@@ -17,15 +20,6 @@ before_cache:
   # Cleanup the cached directories to avoid unnecessary cache updates
   - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
   - find $HOME/.sbt        -name "*.lock"               -print -delete
-
-before_install:
- - export CHROME_BIN=/usr/bin/google-chrome
- - export DISPLAY=:99.0
- - sh -e /etc/init.d/xvfb start
- - sudo apt-get update
- - sudo apt-get install -y libappindicator1 fonts-liberation
- - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
- - sudo dpkg -i google-chrome*.deb
 
 before_script:
   # JavaScript test and build requirements
