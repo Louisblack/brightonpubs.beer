@@ -4,6 +4,9 @@ sudo: required
 scala:
   - 2.11.8
 
+addons:
+  chrome: stable
+
 env:
   - TRAVIS_NODE_VERSION="6"
 
@@ -17,7 +20,7 @@ before_cache:
   - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
   - find $HOME/.sbt        -name "*.lock"               -print -delete
 
-before_deploy:
+before_script:
   # JavaScript test and build requirements
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
   - npm install
