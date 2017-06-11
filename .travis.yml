@@ -1,9 +1,18 @@
 language: scala
 jdk: oraclejdk8
+dist: trusty
 sudo: required
 scala:
   - 2.11.8
 
+sbt_args: -Dwebdriver.chrome.driver=./chromedriver
+
+addons:
+  apt:
+    packages:
+      - google-chrome-stable
+      - unzip
+      - dbus-x11
 env:
   - TRAVIS_NODE_VERSION="6"
 
@@ -17,11 +26,20 @@ before_cache:
   - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
   - find $HOME/.sbt        -name "*.lock"               -print -delete
 
-before_deploy:
+before_script:
   # JavaScript test and build requirements
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
   - npm install
   - npm run webpack
+  - export DBUS_SESSION_BUS_ADDRESS=/dev/null
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - "export DISPLAY=:99.0"
+  - "Xvfb :99 +extension RANDR &"
+  - sleep 5 # give xvfb some time to start
+  - "mkdir -p ~/tmp/bin"
+  - "pushd ~/tmp/bin && wget -c https://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && popd"
+  - "chmod -vv +x ~/tmp/bin/*"
+  - "export PATH=$HOME/tmp/bin:$PATH"
 
 deploy:
   provider: script

@@ -12,6 +12,8 @@ libraryDependencies += "com.h2database" % "h2" % "1.4.192"
 libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1201-jdbc41"
 libraryDependencies += "de.svenkubiak" % "jBCrypt" % "0.4.1"
 
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.0" % "test"
+
 libraryDependencies += specs2 % Test
 libraryDependencies += filters
 libraryDependencies += ws
