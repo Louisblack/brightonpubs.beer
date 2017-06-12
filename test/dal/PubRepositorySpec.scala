@@ -52,6 +52,13 @@ class PubRepositorySpec extends PlaySpec with OneAppPerSuite {
       }
     }
 
+    "get single pub with location" in {
+      val eventualPub = pubRepository.getPub(1L)
+      eventualPub.map{ pub =>
+        pub must not be None
+      }
+    }
+
   }
 
 }

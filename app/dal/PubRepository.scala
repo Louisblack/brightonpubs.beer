@@ -58,7 +58,11 @@ class PubRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit
   def listPubs(): Future[Seq[PubWithLocation]] = {
     db.run {
       val query = for {
-        (pub, location) <- openPubs join locations on (_.id === _.pubId) sortBy(_._1.name.asc)
+        (pub, location) <- (
+          openPubs
+          join locations on (_.id === _.pubId)
+          sortBy(_._1.name.asc)
+        )
       } yield {
         (pub, location)
       }
@@ -68,6 +72,17 @@ class PubRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit
 
   def listPubsWithVisits(userId: Long): Future[Seq[PubWithLocationAndVisit]] = {
     db.run(pubsWithLocationsQuery(userId)).map(_.map(PubWithLocationAndVisit.apply))
+  }
+
+  def getPub(pubId: Long): Future[Option[PubWithLocation]] = {
+    db.run {
+      val query = for {
+        (pub, location) <- pubs.filter(_.id === pubId) join locations on (_.id === _.pubId)
+      } yield {
+        (pub, location)
+      }
+      query.result.headOption
+    }.map(_.map(PubWithLocation.apply))
   }
 
   private def pubsWithLocationsQuery(userId: Long) = {

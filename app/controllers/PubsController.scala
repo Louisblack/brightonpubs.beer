@@ -5,11 +5,11 @@ import dal.PubRepository
 import play.api.libs.json.Json
 import play.api.mvc._
 import services.auth.{MaybeUserAuthAction, UserAuthAction}
-import services.pubs.{Pub, PubListService, PubStats}
+import services.pubs.{Pub, PubListService, PubStats, SimplePub}
 
 import scala.concurrent.ExecutionContext
 
-case class PubsStatsAndMaybeEmail(pubs: Seq[Pub], pubStats: PubStats, maybeEmail: Option[String])
+case class PubsStatsAndMaybeEmail(pubs: Seq[SimplePub], pubStats: PubStats, maybeEmail: Option[String])
 
 object PubsStatsAndMaybeEmail {
   implicit val writes = Json.writes[PubsStatsAndMaybeEmail]

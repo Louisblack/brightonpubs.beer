@@ -7,32 +7,13 @@ import play.api.libs.json.Json
 
 import scala.concurrent.{ExecutionContext, Future}
 
-case class Pub(id: Long, name: String, visited: Boolean)
-
-object Pub {
-
-  implicit val writes = Json.writes[Pub]
-
-  def apply(pubWithLocation: PubWithLocation): Pub = {
-    Pub(pubWithLocation.pub.id, pubWithLocation.pub.name, false)
-  }
-
-  def apply(pubWithLocationAndVisit: PubWithLocationAndVisit): Pub = {
-    val visited = pubWithLocationAndVisit.visit match {
-      case None => false
-      case Some(_) => true
-    }
-    Pub(pubWithLocationAndVisit.id, pubWithLocationAndVisit.name, visited)
-  }
-}
-
 @Singleton
 class PubListService @Inject()(pubRepository: PubRepository)(implicit ec: ExecutionContext) {
 
-  def listPubs(maybeUser: Option[User]): Future[Seq[Pub]] = {
+  def listPubs(maybeUser: Option[User]): Future[Seq[SimplePub]] = {
     maybeUser match {
-      case None => pubRepository.listPubs().map(_.map(Pub.apply(_)))
-      case Some(user) => pubRepository.listPubsWithVisits(user.id).map(_.map(Pub.apply(_)))
+      case None => pubRepository.listPubs().map(_.map(SimplePub.apply(_)))
+      case Some(user) => pubRepository.listPubsWithVisits(user.id).map(_.map(SimplePub.apply(_)))
     }
   }
 
