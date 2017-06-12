@@ -3,17 +3,15 @@ package services.auth
 import dal.UserRepository
 import models.User
 import org.junit.runner.RunWith
-import org.specs2.mutable.Specification
-import org.specs2.specification.BeforeEach
-import org.specs2.mock._
-import org.specs2.mutable._
 import org.specs2.concurrent.ExecutionEnv
+import org.specs2.mock._
 import org.specs2.mock.mockito.MockitoMatchers
+import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 import play.api.mvc.Cookie
 
 import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, Future, duration}
+import scala.concurrent.{Await, Future}
 
 @RunWith(classOf[JUnitRunner])
 case class SignUpServiceSpec(implicit ee: ExecutionEnv) extends Specification with Mockito {

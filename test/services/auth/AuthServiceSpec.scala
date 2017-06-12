@@ -7,12 +7,11 @@ import org.specs2.concurrent.ExecutionEnv
 import org.specs2.mock.Mockito
 import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
-import org.specs2.specification.AfterEach
 import play.api.cache.CacheApi
 import play.api.mvc.Cookie
 
-import scala.concurrent.{Await, Future}
 import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
 
 @RunWith(classOf[JUnitRunner])
 class AuthServiceSpec(implicit ee: ExecutionEnv) extends Specification with Mockito {
