@@ -2,7 +2,6 @@ package controllers
 
 import com.google.inject.Inject
 import dal.PubRepository
-import models.User
 import play.api.libs.json.Json
 import play.api.mvc._
 import services.auth.{MaybeUserAuthAction, UserAuthAction}

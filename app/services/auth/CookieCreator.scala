@@ -21,7 +21,7 @@ class CookieCreator @Inject()(cacheApi: CacheApi)(ec: ExecutionContext) {
     val userPart = user.id.toString.toUpperCase
     val key = s"$randomPart|$userPart"
     val token = Base64.encodeBase64String(CookieCreator.mda.digest(key.getBytes))
-    val duration = Duration.create(10, TimeUnit.HOURS)
+    val duration = Duration.create(2, TimeUnit.DAYS)
     cacheApi.set(token, user, duration)
     Cookie(CookieCreator.cookieHeader, token, maxAge = Some(duration.toSeconds.toInt))
   }

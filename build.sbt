@@ -25,9 +25,9 @@ enablePlugins(SbtJsEngine)
 
 updateOptions := updateOptions.value.withCachedResolution(true)
 
-import com.typesafe.sbt.jse.JsEngineImport.JsEngineKeys._
-import com.typesafe.sbt.jse.SbtJsTask._
 import com.typesafe.sbt.jse.SbtJsEngine.autoImport.JsEngineKeys._
+import com.typesafe.sbt.jse.SbtJsTask._
+
 import scala.concurrent.duration._
 
 lazy val install = taskKey[Unit]("npm")

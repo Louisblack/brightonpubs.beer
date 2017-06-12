@@ -1,6 +1,5 @@
 package services.pubs
 
-import com.google.inject.Singleton
 import play.api.libs.json.Json
 
 case class PubStats(visited: Int, total: Int, percentage: Int)
