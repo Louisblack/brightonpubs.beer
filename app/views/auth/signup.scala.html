@@ -10,6 +10,7 @@
             <input type="text" class="form-control" name="email" placeholder="Email Address" required="" autofocus="" />
             <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
             <input type="password" class="form-control" name="passwordAgain" placeholder="Password again" required=""/>
+            <p>By signing up you are agreeing to our <a href="/privacy">privacy policy</a>.</p>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
             @maybeErrorMessage.map { errorMessage =>
                 <span class="auth-error text-danger">@errorMessage</span>
