@@ -4,12 +4,13 @@
 
 import javax.inject.{Inject, Singleton}
 
+import controllers.TLSFilter
 import play.api.http.HttpFilters
 import play.api.mvc.EssentialFilter
 import play.filters.csrf.CSRFFilter
 import play.filters.headers.SecurityHeadersFilter
 
 @Singleton
-class Filters @Inject()(csrfFilter: CSRFFilter, securityHeadersFilter: SecurityHeadersFilter) extends HttpFilters {
-  override def filters: Seq[EssentialFilter] = Seq(securityHeadersFilter)
+class Filters @Inject()(csrfFilter: CSRFFilter, securityHeadersFilter: SecurityHeadersFilter, tlsFilter: TLSFilter) extends HttpFilters {
+  override def filters: Seq[EssentialFilter] = Seq(tlsFilter, securityHeadersFilter)
 }
