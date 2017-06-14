@@ -8,8 +8,7 @@ GET     /pubs                       controllers.PubsController.index
 POST    /pubs/visit/:pub            controllers.PubsController.visit(pub: Long)
 POST    /pubs/unvisit/:pub          controllers.PubsController.unVisit(pub: Long)
 
-GET     /pub/:pub                   controllers.PubController.index(pub: Long)
-
+GET     /pubs/:pub                  controllers.PubController.index(pub: Long)
 # Privacy
 GET     /privacy                    controllers.PrivacyController.privacy
 

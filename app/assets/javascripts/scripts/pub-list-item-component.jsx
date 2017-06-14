@@ -1,5 +1,8 @@
 import React from "react";
+import {Link} from 'react-router-dom'
+
 import axios from "axios";
+
 
 class PubListItemComponent extends React.Component {
 
@@ -7,9 +10,8 @@ class PubListItemComponent extends React.Component {
         return <li key={this.props.pub.id} className="pub-list__list__item">
             <div>
                 {this.status()}
-                <h3><a href={'/pub/' + this.props.pub.id}>{this.props.pub.name}</a></h3>
+                <h3><Link to={`/pub/${this.props.pub.id}`}>{this.props.pub.name}</Link></h3>
             </div>
-
         </li>;
     };
 
