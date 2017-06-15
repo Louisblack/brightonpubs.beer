@@ -3,12 +3,14 @@ import axios from "axios";
 
 import PubListItemComponent from "./pub-list-item-component.jsx";
 
+let pubs = [];
+
 class PubListComponent extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            pubs: [],
+            pubs: pubs,
             loggedIn: false
         };
     }
@@ -74,6 +76,7 @@ class PubListComponent extends React.Component {
     refreshPubs = () => {
         axios.get('/pubs').then(response => {
             const json = response.data;
+            pubs = json.pubs;
             this.setState({
                 pubs: json.pubs,
                 pubStats: json.pubStats,
