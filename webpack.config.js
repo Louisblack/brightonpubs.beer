@@ -10,6 +10,27 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                options: {
+                    plugins: [
+                        [
+                            'react-transform',
+                            {
+                                transforms: [
+                                    {
+                                        transform: 'react-transform-hmr',
+                                        imports: ['react'],
+                                        locals: ['module'],
+                                    },
+                                ],
+                            },
+                        ],
+                    ],
+                },
+            },
+            {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 include: /ui/,
