@@ -3,12 +3,18 @@ package models
 import play.api.libs.json.Json
 
 case class PubWithLocationAndVisit(pubWithLocation: PubWithLocation, visit: Option[Visit]) {
+
+
   def name: String = {
     pubWithLocation.pub.name
   }
 
   def id: Long = {
     pubWithLocation.pub.id
+  }
+
+  def imgUrl: Option[String] = {
+    pubWithLocation.pub.imgUrl
   }
 
 }

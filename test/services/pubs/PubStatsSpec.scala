@@ -39,10 +39,10 @@ class PubStatsSpec extends Specification {
   }
 
   private def hartyNotVisited = {
-    SimplePub(1, "Hartington", false)
+    SimplePub(1, "Hartington", false, None)
   }
 
   private def constantVisited = {
-    SimplePub(2, "Constant", true)
+    SimplePub(2, "Constant", true, None)
   }
 }

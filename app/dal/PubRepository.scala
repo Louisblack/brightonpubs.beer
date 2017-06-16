@@ -4,6 +4,7 @@ import com.google.inject.{Inject, Singleton}
 import models._
 import play.api.db.slick.DatabaseConfigProvider
 import slick.driver.JdbcProfile
+import slick.profile.SqlProfile.ColumnOption.Nullable
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -43,7 +44,9 @@ class PubRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit
 
     def status = column[String]("pub_status")
 
-    def * = (id, name) <> ((Pub.apply _).tupled, Pub.unapply)
+    def imgUrl = column[Option[String]]("img_url", Nullable)
+
+    def * = (id, name, imgUrl) <> ((Pub.apply _).tupled, Pub.unapply)
   }
 
   private val visits = TableQuery[Visits]
