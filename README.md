@@ -12,21 +12,20 @@ This repo is the code for that website.
 
 ### Missing Pubs
 * Islingword
-* Village
-* Fiveways
+* Montreal Arms
+* Independent
 * Richmond
 * Brighton Bierhaus
+* Fox on the Downs
 
 ### Pubs that have closed
-* Horse and Groom
 * Foundry
 
 ### To do
 * Keep me logged in
 * Login with OAuth
 * Report a missing pub
-* Pub detail page with map
 * Show all on map
-* Photos
+* Photos (in progress)
 * Find a closest pub I've not been to
 
