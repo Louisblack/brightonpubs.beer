@@ -14,9 +14,11 @@ class PubDetailComponent extends React.Component {
 
     render = () => {
         return this.state.detail ? <div className="pub-detail">
-                {this.status()}
                 <h2>{this.state.detail.pub.name}</h2>
-                {this.map()}
+                <div className="container">
+                    {this.state.detail.pub.imgUrl ? <img src={this.state.detail.pub.imgUrl} className="pub-detail__image col-md-6"/> : null}
+                    {this.map()}
+                </div>
             </div> : <div></div>;
     };
 
@@ -33,7 +35,7 @@ class PubDetailComponent extends React.Component {
             tooltipAnchor: [16, -28],
             shadowSize: [0, 0]
         });
-        return <Map center={position} zoom={15}>
+        return <Map center={position} zoom={15} className="col-md-6">
             <TileLayer
                 url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -44,25 +46,6 @@ class PubDetailComponent extends React.Component {
                 </Popup>
             </Marker>
         </Map>
-    };
-
-    visitPub = (id) => {
-        if (!this.props.pub.visited) {
-            axios.post(`/pubs/visit/${id}`)
-                .then(this.props.refresh);
-        } else {
-            axios.post(`/pubs/unvisit/${id}`)
-                .then(this.props.refresh);
-        }
-    };
-
-    status = () => {
-        if (this.props.loggedIn) {
-            let className = "pub-list__list__item__status--" + (this.props.pub.visited ? "visited" : "not-visited");
-            return <div className={className + " glyphicon glyphicon-ok-circle pub-list__list__item__status"}
-                        onClick={e => this.visitPub(this.props.pub.id)}></div>
-        }
-
     };
 
     componentDidMount = () => {

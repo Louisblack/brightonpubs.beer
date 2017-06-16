@@ -1,3 +1,9 @@
 .pub-detail .leaflet-container {
     height: 200px;
 }
+
+.pub-detail__image {
+    max-width: 100%;
+    max-height: 400px;
+    margin-bottom: 1em;
+}

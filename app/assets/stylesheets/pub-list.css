@@ -1,6 +1,10 @@
 .pub-list {
 }
 
+.pub-list a {
+    color: black;
+}
+
 .pub-list__list {
     margin-top: auto;
     margin-right: auto;
@@ -31,4 +35,11 @@
 
 .pub-list__list__item__status--not-visited {
     color: black;
+}
+
+.pub-list__list__item__image {
+    max-height: 20em;
+    max-width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
 }
