@@ -30,22 +30,7 @@ import com.typesafe.sbt.jse.SbtJsTask._
 
 import scala.concurrent.duration._
 
-lazy val install = taskKey[Unit]("npm")
 
-install := {
-  ( npmNodeModules in Assets ).value
-  val modules =  (baseDirectory.value / "node_modules").getAbsolutePath
-  executeJs(state.value,
-    engineType.value,
-    None,
-    Seq(modules),
-    baseDirectory.value / "node_modules/webpack/bin/webpack.js",
-    Seq(),
-    30.seconds)
-  ()
-}
-
-(packageBin in Assets) <<= (packageBin in Assets) dependsOn install
 
 herokuProcessTypes in Compile := Map(
   "web" -> "target/universal/stage/bin/brighton-pubs-app -Dhttp.port=$PORT -Dconfig.resource=${CONF} -Dplay.crypto.secret=${SECRET}"
