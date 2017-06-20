@@ -17,6 +17,12 @@ This repo is the code for that website.
 * Richmond
 * Brighton Bierhaus
 * Fox on the Downs
+* Block
+* Camelford Arms
+* Ginger Dog
+* Golden Cannon
+* Shortt's
+* Wellington
 
 ### Pubs that have closed
 * Foundry
