@@ -10,10 +10,10 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class PubListService @Inject()(pubRepository: PubRepository)(implicit ec: ExecutionContext) {
 
-  def listPubs(maybeUser: Option[User]): Future[Seq[SimplePub]] = {
+  def listPubs(maybeUser: Option[User]): Future[Seq[Pub]] = {
     maybeUser match {
-      case None => pubRepository.listPubs().map(_.map(SimplePub.apply(_)))
-      case Some(user) => pubRepository.listPubsWithVisits(user.id).map(_.map(SimplePub.apply(_)))
+      case None => pubRepository.listPubs().map(_.map(Pub.apply(_)))
+      case Some(user) => pubRepository.listPubsWithVisits(user.id).map(_.map(Pub.apply(_)))
     }
   }
 

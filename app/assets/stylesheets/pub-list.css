@@ -10,6 +10,10 @@
     margin-right: auto;
 }
 
+.pub-list__map {
+    height: 300px;
+}
+
 .pub-list__list__item {
     border-bottom: 1px #bbbbbb solid;
     margin-top: 1em;

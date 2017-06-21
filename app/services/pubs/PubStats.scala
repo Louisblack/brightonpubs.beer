@@ -7,12 +7,12 @@ case class PubStats(visited: Int, total: Int, percentage: Int)
 object PubStats {
   implicit val writes = Json.writes[PubStats]
 
-  def apply(pubs: Seq[SimplePub]) = {
+  def apply(pubs: Seq[Pub]) = {
     getPubStats(pubs)
   }
 
-  private def getPubStats(pubs: Seq[SimplePub]): PubStats = {
-    val visited = pubs.filter(_.visited).length
+  private def getPubStats(pubs: Seq[Pub]): PubStats = {
+    val visited = pubs.filter(_.details.visited).length
     val total = pubs.length
     val percentage = visited match {
       case 0 => 0

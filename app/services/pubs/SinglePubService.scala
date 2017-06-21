@@ -9,11 +9,11 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class SinglePubService @Inject()(pubRepository: PubRepository)(implicit ec: ExecutionContext) {
 
-  def getPubDetail(pubId: Long, user: Option[User]): Future[Option[DetailedPub]] = {
+  def getPubDetail(pubId: Long, user: Option[User]): Future[Option[Pub]] = {
     for {
       maybePubWithLocation <- pubRepository.getPub(pubId)
     } yield {
-      maybePubWithLocation.map(DetailedPub.apply)
+      maybePubWithLocation.map(Pub.apply)
     }
   }
 

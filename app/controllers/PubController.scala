@@ -6,11 +6,11 @@ import models.User
 import play.api.libs.json.Json
 import play.api.mvc.Controller
 import services.auth.{MaybeUserAuthAction, UserAuthAction}
-import services.pubs.{DetailedPub, PubListService, PubStats, SinglePubService}
+import services.pubs.{Pub, PubListService, PubStats, SinglePubService}
 
 import scala.concurrent.ExecutionContext
 
-case class PubAndMaybeUser(detail: DetailedPub, maybeEmail: Option[String])
+case class PubAndMaybeUser(detail: Pub, maybeEmail: Option[String])
 
 object PubAndMaybeUser {
   implicit val writes = Json.writes[PubAndMaybeUser]
