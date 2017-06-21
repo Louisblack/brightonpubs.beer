@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 
-
 import PubListItemComponent from "./pub-list-item-component.jsx";
+import PubListMapComponent from "./pub-list-map-component.jsx";
 
 let pubs = [];
 
@@ -14,14 +14,17 @@ class PubListComponent extends React.Component {
             pubs: pubs,
             loggedIn: false
         };
+        this.goToPub = (id) => console.log(id);
     }
 
     render = () => {
+
         return <div className="pub-list">
             {this.message()}
+            <PubListMapComponent pubs={this.state.pubs}/>
             <ul className="list-unstyled pub-list__list">
                 {this.state.pubs.map(pub => {
-                    return <PubListItemComponent pub={pub} loggedIn={this.state.loggedIn} refresh={this.refreshPubs} />
+                    return <PubListItemComponent pub={pub.details} loggedIn={this.state.loggedIn} refresh={this.refreshPubs} />
                 })}
             </ul>
         </div>;
@@ -85,7 +88,7 @@ class PubListComponent extends React.Component {
 
             }, () => console.log(this.state));
         });
-    }
+    };
 }
 
 export default PubListComponent;

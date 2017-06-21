@@ -1,10 +1,10 @@
-@import services.pubs.DetailedPub
-@(pub: DetailedPub)(implicit request: RequestHeader, messages: Messages)
+@import services.pubs.Pub
+@(pub: Pub)(implicit request: RequestHeader, messages: Messages)
 
 @main("Brighton Pubs") {
     <div class="container-fluid">
         <div class="row">
-            <div id="PubDetailComponent" data-pub-id="@pub.pub.id" class="col-md-8 __react-root"></div>
+            <div id="PubDetailComponent" data-pub-id="@pub.details.id" class="col-md-8 __react-root"></div>
             <div id="ads" class="col-md-4">
             </div>
         </div>
