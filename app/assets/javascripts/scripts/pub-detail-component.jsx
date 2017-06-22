@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import mapIcons from "./map-icons.jsx";
+import OsmTileLayer from "./osm-tile-layer.jsx";
 
 class PubDetailComponent extends React.Component {
 
@@ -26,21 +28,9 @@ class PubDetailComponent extends React.Component {
         const location = this.state.pub.location,
               position = [location.lat, location.lng];
 
-        const icon = new L.Icon({
-            iconUrl: '/assets/images/marker-icon.png',
-            iconRetinaUrl: '/assets/images/marker-icon-2x.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            tooltipAnchor: [16, -28],
-            shadowSize: [0, 0]
-        });
         return <Map center={position} zoom={15} className="col-md-6">
-            <TileLayer
-                url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-            <Marker position={position} icon={icon}>
+            <OsmTileLayer />
+            <Marker position={position} icon={mapIcons.detailPageMapIcon}>
                 <Popup>
                     <span>{this.state.pub.details.name}</span>
                 </Popup>
