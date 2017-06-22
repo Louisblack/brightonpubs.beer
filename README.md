@@ -23,6 +23,7 @@ This repo is the code for that website.
 * Golden Cannon
 * Shortt's
 * Wellington
+* Yellow Book
 
 ### Pubs that have closed
 * Foundry
