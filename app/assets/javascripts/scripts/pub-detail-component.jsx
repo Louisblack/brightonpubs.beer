@@ -13,17 +13,17 @@ class PubDetailComponent extends React.Component {
     }
 
     render = () => {
-        return this.state.detail ? <div className="pub-detail">
-                <h2>{this.state.detail.pub.name}</h2>
+        return this.state.pub ? <div className="pub-detail">
+                <h2>{this.state.pub.details.name}</h2>
                 <div className="container">
-                    {this.state.detail.pub.imgUrl ? <img src={this.state.detail.pub.imgUrl} className="pub-detail__image col-md-6"/> : null}
+                    {this.state.pub.details.imgUrl ? <img src={this.state.pub.details.imgUrl} className="pub-detail__image col-md-6"/> : null}
                     {this.map()}
                 </div>
             </div> : <div></div>;
     };
 
     map = () => {
-        const location = this.state.detail.details.location,
+        const location = this.state.pub.location,
               position = [location.lat, location.lng];
 
         const icon = new L.Icon({
@@ -42,7 +42,7 @@ class PubDetailComponent extends React.Component {
             />
             <Marker position={position} icon={icon}>
                 <Popup>
-                    <span>{this.state.detail.pub.name}</span>
+                    <span>{this.state.pub.details.name}</span>
                 </Popup>
             </Marker>
         </Map>
@@ -56,7 +56,7 @@ class PubDetailComponent extends React.Component {
         axios.get(`/pubs/${this.id}`).then(response => {
             const json = response.data;
             this.setState({
-                detail: json.detail,
+                pub: json.detail,
                 loggedIn: !!json.maybeEmail
             }, () => console.log(this.state));
         });

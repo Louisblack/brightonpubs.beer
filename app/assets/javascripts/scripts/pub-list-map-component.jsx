@@ -1,13 +1,13 @@
 import React from "react";
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-
+import {withRouter} from "react-router-dom";
 class PubListItemComponent extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
         };
-    }
+    };
 
     render = () => {
         const centre = [50.8305877,-0.1376037];
@@ -30,12 +30,17 @@ class PubListItemComponent extends React.Component {
                 const position = [pub.location.lat, pub.location.lng];
                 return <Marker position={position} icon={icon}>
                     <Popup>
-                        <span>{pub.details.name}</span>
+                        <span><button onClick={() => this.goToPub(pub.details.id)}>{pub.details.name}</button></span>
                     </Popup>
                 </Marker>
             })}
         </Map>;
     };
+
+    goToPub = (id) => {
+        console.log(id);
+        this.props.history.push(`/pub/${id}`);
+    }
 }
 
-export default PubListItemComponent;
+export default withRouter(PubListItemComponent);

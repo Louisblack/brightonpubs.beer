@@ -7,6 +7,8 @@ import {
     Link
 } from 'react-router-dom'
 
+import { browserHistory } from 'react-router';
+
 import PubDetailComponent from './pub-detail-component.jsx';
 import PubListComponent from './pub-list-component.jsx';
 
@@ -18,7 +20,7 @@ const App = () => (
 );
 
 ReactDOM.render((
-    <Router>
+    <Router history={browserHistory}>
         <App />
     </Router>
 ), document.getElementById('root'));
