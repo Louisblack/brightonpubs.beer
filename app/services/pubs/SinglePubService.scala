@@ -10,12 +10,9 @@ import scala.concurrent.{ExecutionContext, Future}
 class SinglePubService @Inject()(pubRepository: PubRepository)(implicit ec: ExecutionContext) {
 
   def getPubDetail(pubId: Long, user: Option[User]): Future[Option[Pub]] = {
-    for {
-      maybePubWithLocation <- pubRepository.getPub(pubId)
-    } yield {
-      maybePubWithLocation.map(Pub.apply)
+    user match {
+      case None => pubRepository.getPub(pubId).map(_.map(Pub.apply))
+      case Some(user) => pubRepository.getPubWithVisit(pubId, user.id).map(_.map(Pub.apply))
     }
   }
-
-
 }

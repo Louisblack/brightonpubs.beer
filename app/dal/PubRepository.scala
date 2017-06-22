@@ -88,6 +88,23 @@ class PubRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit
     }.map(_.map(PubWithLocation.apply))
   }
 
+  def getPubWithVisit(pubId: Long, userId: Long): Future[Option[PubWithLocationAndVisit]] = {
+    db.run {
+      val query = for {
+        ((pub, location), visit) <- (
+          pubs.filter(_.id === pubId)
+          join locations
+          on (_.id === _.pubId)
+          joinLeft userVisits(userId)
+          on (_._1.id === _.pubId)
+          )
+      } yield {
+        ((pub, location), visit)
+      }
+      query.result.headOption
+    }.map(_.map(PubWithLocationAndVisit.apply))
+  }
+
   private def pubsWithLocationsQuery(userId: Long) = {
     val query = for {
       ((pub, location), visit) <- (

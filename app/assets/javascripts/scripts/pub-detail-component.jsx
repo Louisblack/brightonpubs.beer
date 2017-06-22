@@ -4,6 +4,7 @@ import axios from "axios";
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import mapIcons from "./map-icons.jsx";
 import OsmTileLayer from "./osm-tile-layer.jsx";
+import Status from './pub-visit-status.jsx';
 
 class PubDetailComponent extends React.Component {
 
@@ -16,6 +17,7 @@ class PubDetailComponent extends React.Component {
 
     render = () => {
         return this.state.pub ? <div className="pub-detail">
+                <Status pub={this.state.pub.details} loggedIn={this.state.loggedIn} refresh={this.refreshPubs}/>
                 <h2>{this.state.pub.details.name}</h2>
                 <div className="container">
                     {this.state.pub.details.imgUrl ? <img src={this.state.pub.details.imgUrl} className="pub-detail__image col-md-6"/> : null}

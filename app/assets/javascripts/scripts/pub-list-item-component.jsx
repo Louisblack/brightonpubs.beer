@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom'
 import LazyLoad from 'react-lazyload';
 
-import axios from "axios";
+import Status from './pub-visit-status.jsx';
 
 
 class PubListItemComponent extends React.Component {
@@ -11,7 +11,7 @@ class PubListItemComponent extends React.Component {
         return <li key={this.props.pub.id} className="pub-list__list__item">
             <div className="container-fluid">
                 <div className="row">
-                    {this.status()}
+                    <Status pub={this.props.pub} refresh={this.props.refresh} loggedIn={this.props.loggedIn} />
                     <h3 className=".col-md-12"><Link to={`/pub/${this.props.pub.id}`}>{this.props.pub.name}</Link></h3>
                 </div>
                 <div className="row">
@@ -22,25 +22,6 @@ class PubListItemComponent extends React.Component {
             </div>
         </li>;
     };
-
-    visitPub = (id) => {
-        if (!this.props.pub.visited) {
-            axios.post(`/pubs/visit/${id}`)
-                .then(this.props.refresh);
-        } else {
-            axios.post(`/pubs/unvisit/${id}`)
-                .then(this.props.refresh);
-        }
-    };
-
-    status = () => {
-        if (this.props.loggedIn) {
-            let className = "pub-list__list__item__status--" + (this.props.pub.visited ? "visited" : "not-visited");
-            return <div className={className + " glyphicon glyphicon-ok-circle pub-list__list__item__status"}
-                        onClick={e => this.visitPub(this.props.pub.id)}></div>
-        }
-
-    }
 
 }
 
