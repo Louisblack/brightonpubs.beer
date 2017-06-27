@@ -32,7 +32,7 @@ class PubDetailComponent extends React.Component {
 
         return <Map center={position} zoom={15} className="col-md-6">
             <OsmTileLayer />
-            <Marker position={position} icon={mapIcons.detailPageMapIcon}>
+            <Marker position={position} icon={mapIcons.detailPageIcon(this.state.pub.details.visited)}>
                 <Popup>
                     <span>{this.state.pub.details.name}</span>
                 </Popup>

@@ -20,7 +20,7 @@ class PubListItemComponent extends React.Component {
             <OsmTileLayer />
             {this.props.pubs.filter(pub => {return pub.location}).map(pub => {
                 const position = [pub.location.lat, pub.location.lng];
-                return <Marker position={position} icon={mapIcons.listPageMapIcon}>
+                return <Marker position={position} icon={mapIcons.listPageIcon(pub.details.visited)}>
                     <Popup>
                         <span><button onClick={() => this.goToPub(pub.details.id)}>{pub.details.name}</button></span>
                     </Popup>
